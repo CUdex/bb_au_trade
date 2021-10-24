@@ -49,6 +49,7 @@ class MySigner(QObject) :
 # window.show()
 # app.exec_()
 
+#네이버에서 html 정보를 가져오기
 url = "http://www.naver.com"
 res = requests.get(url)
 print(res.text)

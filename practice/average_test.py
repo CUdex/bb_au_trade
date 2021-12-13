@@ -29,9 +29,44 @@ get_key = f.read().splitlines()
 access_key = get_key[1]
 secret_key = get_key[3]
 f.close()
+# 해당 코인의 내 잔고 확인
+# upbit = pyupbit.Upbit(access_key, secret_key)
+# print(upbit.get_balances())
+# balance = upbit.get_balance("KRW-SAND")
+# print(balance)
 
+# 각 코인별 내 잔고 조회
 upbit = pyupbit.Upbit(access_key, secret_key)
-print(upbit.get_balances())
+# tickers = pyupbit.get_tickers(fiat="KRW")
+# for ticker in tickers:
+#     balance = upbit.get_balance(ticker)
+#     if balance > 0:
+#         print(ticker, " : ", balance)
+#     time.sleep(0.5)
+print("end")
+
+# 현재 잔고와 코인의 호가를 조회하여 매수할 수 있는 수량을 계산하는 코드
+price = upbit.get_balances()
+krw = price[0]['balance']
+orderbook = pyupbit.get_orderbook("KRW-BTC")
+ask = orderbook['orderbook_units']
+sell_price = ask[0]['ask_price']
+print(sell_price)
+unit = float(krw) / sell_price
+
+print(unit)
+
+# 매수 수량 확인 후 수량만큼 매수
+# order = upbit.buy_market_order("KRW-BTC", 20000)
+# print(order)
+
+# 매도 진행
+
+
+
+
+
+
 # def bull_market(ticker):
 #     get_ohlc = pyupbit.get_ohlcv(ticker)
 #     close = get_ohlc['close'].rolling(window=5).mean()
